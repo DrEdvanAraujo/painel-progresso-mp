@@ -50,10 +50,10 @@ app.post('/create_preference', async (req, res) => {
     const result = await mercadopago.payment.create({
       body: {
         transaction_amount: 99.99,
-        description: "Acesso ao curso PICS",
-        payment_method_id: req.body.payment_method_id,
+        description: "Acesso ao curso",
+        payment_method_id: "pix", // Teste com "pix", "visa", "master", etc.
         payer: {
-          email: req.body.payer.email
+          email: "teste@email.com"
         }
       }
     });
@@ -66,8 +66,3 @@ app.post('/create_preference', async (req, res) => {
   }
 });
 
-app.use('/webhook', mercadoPagoRoutes(saveEmails, getEmails));
-
-app.listen(PORT, () => {
-  console.log(`Servidor online em http://localhost:${PORT}`);
-});
